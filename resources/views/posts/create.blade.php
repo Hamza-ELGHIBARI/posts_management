@@ -1,27 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Document</title>
-</head>
-
-<body>
-    <div class="grid grid-col-2 gap-4 h-full  h-screen ">
-        <div class="w-1/2 flex justify-center items-center">
-            <div>
-                <label class="text-green-600">Titre</label>
-                <input type="text" name="title" placeholder="titre du post" required />
-
-            </div>
-            <label class="text-green-600">Description</label>
-            <textarea class="border-2 border-green-600" name="description" required>description du post</textarea>
-            <div>
-            </div>
+@extends('layouts.sidebar')
+@section('content')
+<div class="flex justify-center">
+    <form action="{{route('posts.store')}}" method="post" class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        @csrf
+        <h2 class="text-2xl font-semibold text-center mb-6">Create a Post</h2>
+        <!-- Title Input -->
+        <div class="mb-4">
+            <label for="title" class="block text-gray-700 font-medium mb-2">Title</label>
+            <input type="text" id="title" name="title"
+                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent  @error('title') border-red-500 @enderror"
+                value="{{ old('title') }}" placeholder="Enter the title" required>
+            @error('title')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
         </div>
-    </div>
-</body>
-
-</html>
+        <!-- Content Textarea -->
+        <div class="mb-6">
+            <label for="content" class="block text-gray-700 font-medium mb-2">Content</label>
+            <textarea id="content" name="content" rows="5"
+                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('content') border-red-500 @enderror"
+                placeholder="Enter the content" required>{{ old('content') }}</textarea>
+            @error('content')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+        <!-- Submit Button -->
+        <button type="submit"
+            class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300">
+            Submit
+        </button>
+    </form>
+</div>
+@endsection
