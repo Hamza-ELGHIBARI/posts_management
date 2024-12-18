@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Mon Application')</title>
@@ -16,11 +17,10 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Left Side -->
                 <div class="flex-shrink-0">
-                    <a href="" class="text-lg font-bold text-blue-600">
+                    <a href="{{route('posts.index')}}" class="text-lg font-bold text-blue-600">
                         Post Share
                     </a>
                 </div>
-
                 <!-- Right Side (Profile Dropdown) -->
                 @auth
                 <div class="relative">
@@ -30,8 +30,7 @@
                         class="flex items-center focus:outline-none"
                         onclick="toggleDropdown()">
                         <img
-                            src="{{ Auth::user()->profile_photo_url ?? 'https://via.placeholder.com/40' }}"
-                            alt="Profile Photo"
+                            src="{{ Auth::user()->profile_photo ? asset('storage/' . Auth::user()->profile_photo) : 'https://via.placeholder.com/40' }}" alt="Profile Photo" alt="Profile Photo"
                             class="h-10 w-10 rounded-full border-2 border-gray-300" />
                     </button>
 
@@ -39,7 +38,7 @@
                     <div
                         id="profileDropdown"
                         class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-20">
-                        <a href="{{ route('profile.show') }}"
+                        <a href="{{ route('profile.edit') }}"
                             class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
                             Profile
                         </a>
@@ -55,8 +54,8 @@
                 @endauth
                 @guest
                 <div>
-                    <a href="{{ route('login.form') }}" class="text-gray-700 hover:text-blue-600 mx-2">Login</a>
-                    <a href="{{ route('register.form') }}" class="text-gray-700 hover:text-blue-600 mx-2">Register</a>
+                    <a href="{{ route('login') }}" class="text-gray-700 hover:text-blue-600 mx-2">Login</a>
+                    <a href="{{ route('register') }}" class="text-gray-700 hover:text-blue-600 mx-2">Register</a>
                 </div>
                 @endguest
             </div>
@@ -64,7 +63,17 @@
     </nav>
     <!-- Page Content -->
     <main class="flex-1 justify-center bg-gray-50 p-6 overflow-y-auto">
-            @yield('content')
+        @if(session('success'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative m-4">
+            {{ session('success') }}
+        </div>
+        @endif
+        @if(session('error'))
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative m-4">
+            {{ session('error') }}
+        </div>
+        @endif
+        @yield('content')
     </main>
     <!-- Simple Dropdown Script -->
     <script>

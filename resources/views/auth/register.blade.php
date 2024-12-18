@@ -1,12 +1,6 @@
 @extends('layouts.navbar')
 @section('content')
 <h2 class="text-2xl font-bold text-center mb-6">Register</h2>
-
-@if(session('success'))
-<div class="bg-green-100 text-green-800 p-3 rounded mb-4">
-    {{ session('success') }}
-</div>
-@endif
 <form method="POST" action="{{ route('register.store') }}">
     @csrf
     <div class="mb-4">
@@ -41,7 +35,7 @@
     </button>
 
     <p class="mt-4 text-sm text-gray-600 text-center">
-        Already have an account? <a href="{{ route('login.form') }}" class="text-blue-600 hover:underline">Login</a>
+        Already have an account? <a href="{{ route('login') }}" class="text-blue-600 hover:underline">Login</a>
     </p>
 </form>
 @endsection

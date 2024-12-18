@@ -14,8 +14,8 @@
                 Post Share
             </a>
             <div>
-                <a href="{{ route('login.form') }}" class="text-gray-700 hover:text-blue-600 mx-2">Login</a>
-                <a href="{{ route('register.form') }}" class="text-gray-700 hover:text-blue-600 mx-2">Register</a>
+                <a href="{{ route('login') }}" class="text-gray-700 hover:text-blue-600 mx-2">Login</a>
+                <a href="{{ route('register') }}" class="text-gray-700 hover:text-blue-600 mx-2">Register</a>
             </div>
         </div>
     </nav>

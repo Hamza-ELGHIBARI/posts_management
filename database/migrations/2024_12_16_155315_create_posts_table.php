@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id(); // Clé primaire
             $table->string('title'); // Titre du post
             $table->text('content'); // Contenu du post
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Relation avec 'users'
             $table->timestamps(); // created_at et updated_at
         });
     }

@@ -1,9 +1,9 @@
 @extends('layouts.sidebar')
 @section('content')
 <div class="flex justify-center">
-    <form action="{{route('posts.store')}}" method="post" class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <form action="{{route('posts.store')}}" method="post" class="p-8 w-full max-w-md">
         @csrf
-        <h2 class="text-2xl font-semibold text-center mb-6">Create a Post</h2>
+        <h2 class="text-2xl font-semibold text-start mb-6">Create a Post</h2>
         <!-- Title Input -->
         <div class="mb-4">
             <label for="title" class="block text-gray-700 font-medium mb-2">Title</label>
@@ -27,7 +27,7 @@
         <!-- Submit Button -->
         <button type="submit"
             class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300">
-            Submit
+            Create
         </button>
     </form>
 </div>

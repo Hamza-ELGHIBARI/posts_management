@@ -30,7 +30,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('login.form')->with('success', 'Votre compte a été créé avec réuissite veuillez vous connecter');
+        return redirect()->route('login')->with('success', 'Votre compte a été créé avec réuissite veuillez vous connecter');
     }
 
     // Formulaire de connexion
@@ -49,7 +49,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($request->only('email', 'password'))) {
             $request->session()->regenerate();
-            return redirect()->route('dashboard')->with('success', 'You are now logged in.');
+            return redirect()->route('welcome');
         }
 
         return back()->with('error', 'Invalid email or password.');
@@ -61,6 +61,6 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate(); // Invalider la session
         $request->session()->regenerateToken(); // Régénérer le token CSRF
-        return redirect()->route('login.form')->with('success', 'Déconnexion avec succès');
+        return redirect()->route('login')->with('success', 'Déconnexion avec succès');
     }
 }

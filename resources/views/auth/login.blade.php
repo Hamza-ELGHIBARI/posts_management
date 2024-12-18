@@ -1,12 +1,8 @@
 @extends('layouts.navbar')
 @section('content')
+<div class="max-w-md">
 <h2 class="text-2xl font-bold text-center mb-6">Login</h2>
-@if(session('success'))
-<div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
-    {{ session('success') }}
-</div>
-@endif
-<form method="POST" action="{{ route('login.store') }}">
+<form method="POST" action="{{ route('login.store') }}" >
     @csrf
     <div class="mb-4">
         <label for="email" class="block text-gray-700">Adresse email</label>
@@ -26,7 +22,8 @@
         Connexion
     </button>
     <p class="mt-4 text-sm text-gray-600 text-center">
-        Vous n'avez pas de compte? <a href="{{ route('register.form') }}" class="text-blue-600 hover:underline">S'inscrire</a>
+        Vous n'avez pas de compte? <a href="{{ route('register') }}" class="text-blue-600 hover:underline">S'inscrire</a>
     </p>
 </form>
+</div>
 @endsection
