@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta charset="UTF-8">
@@ -9,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 h-screen flex flex-col">
 
     <!-- Navbar -->
     <nav class="bg-white border-b border-gray-200 shadow-sm">
@@ -62,7 +61,7 @@
         </div>
     </nav>
     <!-- Page Content -->
-    <main class="flex-1 justify-center bg-gray-50 p-6 overflow-y-auto">
+    <div class="flex-grow justify-center p-6 overflow-y-auto">
         @if(session('success'))
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative m-4">
             {{ session('success') }}
@@ -74,7 +73,7 @@
         </div>
         @endif
         @yield('content')
-    </main>
+    </div>
     <!-- Simple Dropdown Script -->
     <script>
         function toggleDropdown() {
